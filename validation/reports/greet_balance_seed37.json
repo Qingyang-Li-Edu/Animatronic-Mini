@@ -1,0 +1,106 @@
+{
+  "scope": "hierarchical free-root greeting simulation; uncalibrated physical parameters",
+  "lower_policy": "training/checkpoints/greet-balance-seed37/stand_greet.zip",
+  "upper_policy": "/Users/quinnlee/Desktop/rob/chibi_ws/training/checkpoints/ppo-safe/greet.zip",
+  "model_sha256": "6b9e61a816e758510884d6d95a864cf668f7900a059fca843faff8ccacf3e86f",
+  "criteria": "8s (full greeting cycles plus quiet tail) without fall/warning; final tilt<5deg, base speed<.1, drift<.05m, arm RMSE<.05rad, force ratio<.7",
+  "required_success_rate": 0.9,
+  "groups": [
+    {
+      "force_n": 0.0,
+      "controller": "neutral_legs",
+      "success_rate": 0.06666666666666667,
+      "mean_rms_tilt_deg": 0.15957053333838908,
+      "worst_arm_rmse_rad": 0.0072204352706236865,
+      "max_grounded_foot_travel_m": 0.0064951481446276094,
+      "max_contact_slip_integral_m": 0.010331088051770262
+    },
+    {
+      "force_n": 0.0,
+      "controller": "balance_ppo",
+      "success_rate": 1.0,
+      "mean_rms_tilt_deg": 0.15114344523037077,
+      "worst_arm_rmse_rad": 0.008305631782736135,
+      "max_grounded_foot_travel_m": 0.010770991930383217,
+      "max_contact_slip_integral_m": 0.018334707434668477
+    },
+    {
+      "force_n": 0.0,
+      "controller": "previous_balance_ppo",
+      "success_rate": 0.0,
+      "mean_rms_tilt_deg": 0.7989076367499421,
+      "worst_arm_rmse_rad": 0.007497013071451879,
+      "max_grounded_foot_travel_m": 0.0950047030381351,
+      "max_contact_slip_integral_m": 0.14425285634232762
+    },
+    {
+      "force_n": 0.8,
+      "controller": "neutral_legs",
+      "success_rate": 0.06666666666666667,
+      "mean_rms_tilt_deg": 0.22862337958075107,
+      "worst_arm_rmse_rad": 0.007217772033954521,
+      "max_grounded_foot_travel_m": 0.007012955935428958,
+      "max_contact_slip_integral_m": 0.010800343047751062
+    },
+    {
+      "force_n": 0.8,
+      "controller": "balance_ppo",
+      "success_rate": 1.0,
+      "mean_rms_tilt_deg": 0.1596345613616784,
+      "worst_arm_rmse_rad": 0.008299801936530711,
+      "max_grounded_foot_travel_m": 0.011239523982036108,
+      "max_contact_slip_integral_m": 0.018905867128862303
+    },
+    {
+      "force_n": 0.8,
+      "controller": "previous_balance_ppo",
+      "success_rate": 0.0,
+      "mean_rms_tilt_deg": 0.8057231232550525,
+      "worst_arm_rmse_rad": 0.007509121917109295,
+      "max_grounded_foot_travel_m": 0.0977076032046367,
+      "max_contact_slip_integral_m": 0.14430438457991782
+    },
+    {
+      "force_n": 3.0,
+      "controller": "neutral_legs",
+      "success_rate": 0.06666666666666667,
+      "mean_rms_tilt_deg": 2.2728309406798184,
+      "worst_arm_rmse_rad": 0.007267812379261949,
+      "max_grounded_foot_travel_m": 0.017326897003183375,
+      "max_contact_slip_integral_m": 0.018270536146405985
+    },
+    {
+      "force_n": 3.0,
+      "controller": "balance_ppo",
+      "success_rate": 0.8666666666666667,
+      "mean_rms_tilt_deg": 1.48574391820426,
+      "worst_arm_rmse_rad": 0.00846279933167269,
+      "max_grounded_foot_travel_m": 0.051320188867601486,
+      "max_contact_slip_integral_m": 0.04138493313473631
+    },
+    {
+      "force_n": 3.0,
+      "controller": "previous_balance_ppo",
+      "success_rate": 0.0,
+      "mean_rms_tilt_deg": 2.587923155730301,
+      "worst_arm_rmse_rad": 0.0076951490158767375,
+      "max_grounded_foot_travel_m": 0.1004960756047749,
+      "max_contact_slip_integral_m": 0.14180547568341645
+    }
+  ],
+  "continuous": {
+    "success": true,
+    "terminated": false,
+    "duration_s": 120.0,
+    "rms_tilt_deg": 0.11682705953350311,
+    "max_tilt_deg": 2.059274195035002,
+    "final_tilt_deg": 0.06275383132818425,
+    "final_base_speed": 0.0216922762929523,
+    "drift_m": 0.009641166824172424,
+    "arm_rmse_rad": 0.007871276531230141,
+    "max_force_ratio": 0.65,
+    "max_penetration_m": 0.0032406942793591423,
+    "warnings": false
+  },
+  "status": "passed"
+}

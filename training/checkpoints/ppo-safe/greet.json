@@ -1,0 +1,24 @@
+{
+  "algorithm": "PPO",
+  "motion": "greet",
+  "seed": 7,
+  "workers": 2,
+  "device": "cpu",
+  "requested_steps": 262144,
+  "action_mode": "residual",
+  "residual_scale": 0.12,
+  "force_cap_ratio": 0.65,
+  "python": "3.12.13",
+  "platform": "arm64",
+  "packages": {
+    "torch": "2.15.0",
+    "mujoco": "4.0.1",
+    "numpy": "2.5.5",
+    "gymnasium": "0.29.1",
+    "stable-baselines3": "2.9.2"
+  },
+  "model_sha256": "2a6aed909377b4be53a3c4c599f231240d044781d0631a4b39effb9ebe934d57",
+  "motions_sha256": "8118eb42aab3f10039fcb39e43994d9ff6db9e15170fefc52f6dccce684f7444",
+  "completed_steps": 262144,
+  "elapsed_seconds": 55.77987908292562
+}

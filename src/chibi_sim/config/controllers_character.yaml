@@ -1,0 +1,25 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    use_sim_time: true
+    body_jtc:
+      type: joint_trajectory_controller/JointTrajectoryController
+    face_jtc:
+      type: joint_trajectory_controller/JointTrajectoryController
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+body_jtc:
+  ros__parameters:
+    joints: [neck_pitch, head_pitch, head_yaw, head_roll, antenna_l, antenna_r,
+             left_hip_yaw, left_hip_roll, left_hip_pitch, left_knee, left_ankle,
+             right_hip_yaw, right_hip_roll, right_hip_pitch, right_knee, right_ankle,
+             left_shoulder, left_elbow, right_shoulder, right_elbow]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    allow_partial_joints_goal: true
+face_jtc:
+  ros__parameters:
+    joints: [eye_pan, eye_tilt, eyelid_close, jaw_open]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    allow_partial_joints_goal: true

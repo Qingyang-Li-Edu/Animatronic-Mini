@@ -1,0 +1,232 @@
+{
+  "date": "2026-11-17",
+  "stage": "Mac CPU simulation training and validation",
+  "physics_report": "physics.json",
+  "physics_cases_passed": 7,
+  "pose_report": "greet_ppo_safe.json",
+  "pose_stress_report": "greet_stress.json",
+  "balance": [
+    {
+      "report": "balance_seed7.json",
+      "training_seed": 7,
+      "training_push_force_n": 0.8,
+      "completed_steps": 524288,
+      "status_at_0_8n": "passed",
+      "learning_benefit_at_0_8n": true,
+      "strong_push_status": "failed",
+      "groups": [
+        {
+          "force_n": 0.0,
+          "controller": "neutral",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.14424066419053572,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.0,
+          "controller": "ppo",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.1495559649548865,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.1811287411469038
+        },
+        {
+          "force_n": 0.8,
+          "controller": "neutral",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.28328450941645433,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.8,
+          "controller": "ppo",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.16218571609334007,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.1811287411469038
+        },
+        {
+          "force_n": 3.0,
+          "controller": "neutral",
+          "success_rate": 0.6666666666666666,
+          "mean_rms_tilt_deg": 3.8358637874921424,
+          "mean_duration_s": 4.586666666666667,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 3.0,
+          "controller": "ppo",
+          "success_rate": 0.7666666666666667,
+          "mean_rms_tilt_deg": 2.453530473865415,
+          "mean_duration_s": 4.975333333333334,
+          "max_force_ratio": 0.1811287411469038
+        }
+      ]
+    },
+    {
+      "report": "balance_seed27.json",
+      "training_seed": 27,
+      "training_push_force_n": 0.8,
+      "completed_steps": 524288,
+      "status_at_0_8n": "passed",
+      "learning_benefit_at_0_8n": true,
+      "strong_push_status": "failed",
+      "groups": [
+        {
+          "force_n": 0.0,
+          "controller": "neutral",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.14424066419053572,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.0,
+          "controller": "ppo",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.14920611850460042,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.8,
+          "controller": "neutral",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.28328450941645433,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.8,
+          "controller": "ppo",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.16508789551105946,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 3.0,
+          "controller": "neutral",
+          "success_rate": 0.6666666666666666,
+          "mean_rms_tilt_deg": 3.8358637874921424,
+          "mean_duration_s": 4.586666666666667,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 3.0,
+          "controller": "ppo",
+          "success_rate": 0.7666666666666667,
+          "mean_rms_tilt_deg": 2.5374592886946683,
+          "mean_duration_s": 4.97,
+          "max_force_ratio": 0.15923060253884203
+        }
+      ]
+    },
+    {
+      "report": "balance_push3_seed17.json",
+      "training_seed": 17,
+      "training_push_force_n": 3.0,
+      "completed_steps": 524288,
+      "status_at_0_8n": "passed",
+      "learning_benefit_at_0_8n": false,
+      "strong_push_status": "failed",
+      "groups": [
+        {
+          "force_n": 0.0,
+          "controller": "neutral",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.14424066419053572,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.0,
+          "controller": "ppo",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.4395716638716281,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.8,
+          "controller": "neutral",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.28328450941645433,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 0.8,
+          "controller": "ppo",
+          "success_rate": 1.0,
+          "mean_rms_tilt_deg": 0.4627902466839543,
+          "mean_duration_s": 6.0,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 3.0,
+          "controller": "neutral",
+          "success_rate": 0.6666666666666666,
+          "mean_rms_tilt_deg": 3.8358637874921424,
+          "mean_duration_s": 4.586666666666667,
+          "max_force_ratio": 0.15923060253884203
+        },
+        {
+          "force_n": 3.0,
+          "controller": "ppo",
+          "success_rate": 0.8,
+          "mean_rms_tilt_deg": 2.6423856315621266,
+          "mean_duration_s": 5.115,
+          "max_force_ratio": 0.15923060253884203
+        }
+      ]
+    }
+  ],
+  "primary_policy": "training/checkpoints/balance-seed7/stand.zip",
+  "limits": [
+    "provisional uncalibrated mass, inertia, friction and motor limits",
+    "3N recovery gate not met",
+    "no walking or fall-recovery policy",
+    "3N free-root greeting success 86.7%, below 90% gate",
+    "upper-body pose and lower-body balance use hierarchical controllers, not end-to-end training",
+    "VRM retargeting is calibrated in local web viewer; physical hardware alignment is unverified"
+  ],
+  "appearance": "Downloaded BlueFatFish.vrm, live PPO skeleton retargeting via localhost:8766",
+  "migration_report": "bluefish_shell_migration.json",
+  "greeting_balance": {
+    "report": "greet_balance_seed37.json",
+    "policy": "training/checkpoints/greet-balance-seed37/stand_greet.zip",
+    "completed_steps": 262144,
+    "status": "passed",
+    "held_out_0_8n_success_rate": 1.0,
+    "held_out_0_8n_rms_tilt_deg": 0.1596345613616784,
+    "held_out_3n_success_rate": 0.8666666666666667,
+    "continuous_seconds": 120.0,
+    "continuous_success": true,
+    "arm_rmse_rad": 0.007871276531230141,
+    "foot_mapping_error_mm": [
+      1.0,
+      0.4
+    ]
+  },
+  "action_switching": {
+    "report": "action_switching.json",
+    "status": "passed",
+    "continuous_seconds": 32.0,
+    "max_tilt_deg": 0.6423892432955168,
+    "max_drift_m": 0.004137909844023887,
+    "max_active_arm_rmse_rad": 0.01871241458245001
+  },
+  "greeting_balance_push3_attempt": {
+    "report": "greet_balance_push3_seed47.json",
+    "status": "failed",
+    "reason": "specializing on 3N degraded 0/0.8N and 3N held-out success; retained for diagnosis, not loaded by viewer",
+    "success_rates": {
+      "0N": 0.5666666666666667,
+      "0.8N": 0.5,
+      "3N": 0.5333333333333333
+    }
+  }
+}

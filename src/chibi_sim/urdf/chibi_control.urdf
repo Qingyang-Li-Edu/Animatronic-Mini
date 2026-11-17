@@ -1,0 +1,848 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="chibi">
+  <link name="base_link" />
+  <link name="link_base" />
+  <joint name="link_base_fixed" type="fixed">
+    <parent link="base_link" />
+    <child link="link_base" />
+    <origin xyz="0 0 0.22" rpy="0 -0 0" />
+  </joint>
+  <link name="link_trunk_assembly">
+    <visual>
+      <origin xyz="-0.019 0 0.0648909" rpy="0 -0 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/body_front.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_trunk_assembly_0">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.019 3.46945e-18 0.0648909" rpy="0 -0 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/body_back.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_trunk_assembly_1">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.019 -3.46945e-18 0.0648909" rpy="0 -0 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/body_middle_bottom.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_trunk_assembly_2">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.019 0 0.0648909" rpy="0 -0 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/body_middle_top.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_trunk_assembly_3">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.019 9.1073e-18 0.0648909" rpy="-0 -0 1.084202e-19" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/trunk_bottom.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_trunk_assembly_4">
+        <color rgba="0.180392 0.180392 0.180392 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.019 -2.42428e-16 0.0648909" rpy="-9.64216e-17 -1.1071e-14 5.55112e-17" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/trunk_top.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_trunk_assembly_5">
+        <color rgba="0.180392 0.180392 0.180392 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="link_trunk_assembly_fixed" type="fixed">
+    <parent link="link_base" />
+    <child link="link_trunk_assembly" />
+    <origin xyz="0 0 0.0" rpy="0 -0 0" />
+  </joint>
+  <link name="link_hip_roll_assembly">
+    <visual>
+      <origin xyz="-3.33067e-16 -0.035 0.01905" rpy="-8.76998e-16 4.4409e-16 -6.69604e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/roll_motor_bottom.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_hip_roll_assembly_0">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.035 0.01905" rpy="1.50222466548e-32 -3.60822e-16 -8.32668e-17" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/roll_motor_top.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_hip_roll_assembly_1">
+        <color rgba="0.901961 0.901961 0.901961 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="left_hip_yaw" type="revolute">
+    <parent link="link_trunk_assembly" />
+    <child link="link_hip_roll_assembly" />
+    <origin xyz="-0.019 0.035 0.0459409" rpy="-2.35326e-16 -2.18714e-14 5.55112e-17" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.5235987755982979" upper="0.5235987755982997" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_roll_to_pitch_assembly">
+    <visual>
+      <origin xyz="-0.035 -0.065 0.01905" rpy="1.57079632679 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_roll_to_pitch.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_left_roll_to_pitch_assembly_0">
+        <color rgba="0.909804 0.572549 0.164706 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="left_hip_roll" type="revolute">
+    <parent link="link_hip_roll_assembly" />
+    <child link="link_left_roll_to_pitch_assembly" />
+    <origin xyz="0.01905 4.61436e-15 -0.046015" rpy="-1.57079632679 -0 1.57079632679" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.4363323129985815" upper="0.43633231299858327" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_knee_and_ankle_assembly">
+    <visual>
+      <origin xyz="0.01606 0.065 0.10915" rpy="-1.57079632679 1.28669069886e-15 3.44635253222e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_cache.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_0">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10925" rpy="-1.57079632679 1.31207582445e-15 3.70020378811e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/leg_spacer.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_1">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10915" rpy="-1.57079632679 -8.39762581901e-24 -8.39762581901e-24" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_right_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_2">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10915" rpy="-1.57079632679 7.25382438584e-30 7.25382438584e-30" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_left_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_3">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="left_hip_pitch" type="revolute">
+    <parent link="link_left_roll_to_pitch_assembly" />
+    <child link="link_knee_and_ankle_assembly" />
+    <origin xyz="0.07415 -3.25261e-17 0.03511" rpy="3.14159265359 1.57079632679 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.2217304763960306" upper="0.5235987755982988" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_knee_and_ankle_assembly_2">
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10925" rpy="-1.57079632679 1.28123749305e-15 3.39182047413e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/leg_spacer.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_2_0">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10915" rpy="-1.57079632679 1.88258636953e-24 1.88258636953e-24" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_right_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_2_1">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10915" rpy="-1.57079632679 -7.59068995216e-30 -7.59068995216e-30" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_left_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_2_2">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="left_knee" type="revolute">
+    <parent link="link_knee_and_ankle_assembly" />
+    <child link="link_knee_and_ankle_assembly_2" />
+    <origin xyz="0 -0.07865 0.0001" rpy="2.22044e-16 2.22044e-16 -5.29395999753e-23" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_foot_assembly">
+    <visual>
+      <origin xyz="0.01606 0.2223 0.10905" rpy="-1.57079632679 -6.53258983435e-30 -6.53258983435e-30" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_side.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_0">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01656 0.2228 0.10955" rpy="-1.57079632679 2.43946107166e-18 2.43946107166e-18" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_bottom_tpu.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_1">
+        <color rgba="0.305882 0.298039 0.278431 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01656 0.2228 0.10955" rpy="-1.57079632679 2.43946107166e-18 2.43946107166e-18" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_bottom_pla.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_3">
+        <color rgba="0.305882 0.298039 0.278431 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.2223 0.10905" rpy="-1.57079632679 -6.53258983435e-30 -6.53258983435e-30" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_top.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_4">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="left_ankle" type="revolute">
+    <parent link="link_knee_and_ankle_assembly_2" />
+    <child link="link_foot_assembly" />
+    <origin xyz="1.8735e-16 -0.07865 0.0001" rpy="5.55112e-16 1.110224e-15 3.05312e-16" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5707963267948957" upper="1.5707963267948974" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_neck_pitch_assembly">
+    <visual>
+      <origin xyz="-0.02 -0.02511 0.01905" rpy="-1.57079632679 -7.27230815138e-31 -7.27230815138e-31" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/neck_left_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_neck_pitch_assembly_0">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.02 -0.02511 0.01905" rpy="-1.57079632679 4.3344500903e-17 4.3344500903e-17" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/neck_right_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_neck_pitch_assembly_1">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="neck_pitch" type="revolute">
+    <parent link="link_trunk_assembly" />
+    <child link="link_neck_pitch_assembly" />
+    <origin xyz="0.001 0.01915 0.0900009" rpy="1.57079632679 -2.2177449806e-14 -1.17846379685e-16" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988437" upper="1.1344640137963364" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_head_pitch_to_yaw">
+    <visual>
+      <origin xyz="-0.02 -0.09111 0.01905" rpy="-1.57079632679 2.57589021181e-39 2.57589021181e-39" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/head_pitch_to_yaw.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_head_pitch_to_yaw_0">
+        <color rgba="0.4 0.4 0.4 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="head_pitch" type="revolute">
+    <parent link="link_neck_pitch_assembly" />
+    <child link="link_head_pitch_to_yaw" />
+    <origin xyz="-2.9924e-17 0.066 -6.93889e-18" rpy="-3.4406e-16 3.803686518e-33 2.21106e-17" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_neck_yaw_assembly">
+    <visual>
+      <origin xyz="-0.02 1.4985e-16 -0.14821" rpy="1.387778e-17 -1.110224e-16 1.409228e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/head_yaw_to_roll.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_neck_yaw_assembly_0">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="head_yaw" type="revolute">
+    <parent link="link_head_pitch_to_yaw" />
+    <child link="link_neck_yaw_assembly" />
+    <origin xyz="-4.33681e-19 0.057 0.01905" rpy="-1.57079632679 7.37420220702e-17 -2.40275517001e-16" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.792526803190927" upper="2.792526803190927" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_head_assembly">
+    <visual>
+      <origin xyz="-0.12906 1.72388e-17 0.06095" rpy="-3.94349087196e-16 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/head_bot_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_head_assembly_0">
+        <color rgba="0.411765 0.411765 0.411765 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.12906 1.92717e-17 0.06095" rpy="-4.27713203235e-16 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/head.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_head_assembly_1">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="head_roll" type="revolute">
+    <parent link="link_neck_yaw_assembly" />
+    <child link="link_head_assembly" />
+    <origin xyz="0.04095 2.1764e-16 -0.01915" rpy="3.80989015807e-16 -1.57079632679 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.523598775598218" upper="0.5235987755983796" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_antenna_l">
+    <visual>
+      <origin xyz="0.0460005 0.182212 0" rpy="0.494709213063 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/antenna.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_antenna_l_0">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 3.26887e-17 0" rpy="-4.06654155595e-15 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_antenna_holder.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_antenna_l_1">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="antenna_l" type="revolute">
+    <parent link="link_head_assembly" />
+    <child link="link_antenna_l" />
+    <origin xyz="-0.12906 0.0 0.06095" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.8" upper="0.8" effort="0.3" velocity="8.0" />
+  </joint>
+  <link name="link_antenna_r">
+    <visual>
+      <origin xyz="0 -2.4549e-16 0" rpy="-4.75616985831e-15 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/right_antenna_holder.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_antenna_r_0">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.00098 0.000247519 0" rpy="-5.19944647698e-15 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/antenna.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_antenna_r_1">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="antenna_r" type="revolute">
+    <parent link="link_head_assembly" />
+    <child link="link_antenna_r" />
+    <origin xyz="-0.12906 0.0 0.06095" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.8" upper="0.8" effort="0.3" velocity="8.0" />
+  </joint>
+  <link name="link_face_root">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0" />
+      <geometry>
+        <box size="0.006 0.17 0.05" />
+      </geometry>
+      <material name="link_face_root_0">
+        <color rgba="0.025 0.055 0.065 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="link_face_root_fixed" type="fixed">
+    <parent link="link_head_assembly" />
+    <child link="link_face_root" />
+    <origin xyz="0.010 0 -0.065" rpy="-0 1.57079632679 0" />
+  </joint>
+  <link name="link_face_pan" />
+  <joint name="eye_pan" type="revolute">
+    <parent link="link_face_root" />
+    <child link="link_face_pan" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.5" upper="0.5" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_face_tilt">
+    <visual>
+      <origin xyz="0.015 0.04 0.009" rpy="0 -0 0" />
+      <geometry>
+        <sphere radius="0.013" />
+      </geometry>
+      <material name="link_face_tilt_0">
+        <color rgba="0.80 0.96 1 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.026 0.04 0.009" rpy="0 -0 0" />
+      <geometry>
+        <sphere radius="0.0075" />
+      </geometry>
+      <material name="link_face_tilt_1">
+        <color rgba="0.015 0.025 0.035 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.032 0.042 0.012" rpy="0 -0 0" />
+      <geometry>
+        <sphere radius="0.002" />
+      </geometry>
+      <material name="link_face_tilt_2">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.015 -0.04 0.009" rpy="0 -0 0" />
+      <geometry>
+        <sphere radius="0.013" />
+      </geometry>
+      <material name="link_face_tilt_3">
+        <color rgba="0.80 0.96 1 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.026 -0.04 0.009" rpy="0 -0 0" />
+      <geometry>
+        <sphere radius="0.0075" />
+      </geometry>
+      <material name="link_face_tilt_4">
+        <color rgba="0.015 0.025 0.035 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.032 -0.038 0.012" rpy="0 -0 0" />
+      <geometry>
+        <sphere radius="0.002" />
+      </geometry>
+      <material name="link_face_tilt_5">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="eye_tilt" type="revolute">
+    <parent link="link_face_pan" />
+    <child link="link_face_tilt" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.35" upper="0.35" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_face_eyelid">
+    <visual>
+      <origin xyz="0.027 0 0" rpy="0 -0 0" />
+      <geometry>
+        <box size="0.008 0.122 0.008" />
+      </geometry>
+      <material name="link_face_eyelid_0">
+        <color rgba="0.10 0.45 0.50 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="eyelid_close" type="revolute">
+    <parent link="link_face_root" />
+    <child link="link_face_eyelid" />
+    <origin xyz="0 0 0.030" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="1.2" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_face_jaw">
+    <visual>
+      <origin xyz="0.008 0 -0.004" rpy="0 -0 0" />
+      <geometry>
+        <box size="0.008 0.05 0.006" />
+      </geometry>
+      <material name="link_face_jaw_0">
+        <color rgba="0.55 0.87 0.91 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="jaw_open" type="revolute">
+    <parent link="link_face_root" />
+    <child link="link_face_jaw" />
+    <origin xyz="0 0 -0.014" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="0.8" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_hip_roll_assembly_2">
+    <visual>
+      <origin xyz="-3.64292e-16 -0.035 0.01905" rpy="0 -0 -3.05312e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/roll_motor_bottom.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_hip_roll_assembly_2_0">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="3.46945e-18 -0.035 0.01905" rpy="-4.930375998e-32 4.4409e-16 -2.22044e-16" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/roll_motor_top.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_hip_roll_assembly_2_1">
+        <color rgba="0.901961 0.901961 0.901961 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_hip_yaw" type="revolute">
+    <parent link="link_trunk_assembly" />
+    <child link="link_hip_roll_assembly_2" />
+    <origin xyz="-0.019 -0.035 0.0459409" rpy="-8.50828e-16 -2.14274e-14 5.55112e-17" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.523598775598297" upper="0.5235987755983006" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_roll_to_pitch_assembly">
+    <visual>
+      <origin xyz="0.035 -0.065 0.01905" rpy="1.57079632679 1.57079632679 0" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/right_roll_to_pitch.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_right_roll_to_pitch_assembly_0">
+        <color rgba="0.909804 0.572549 0.164706 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_hip_roll" type="revolute">
+    <parent link="link_hip_roll_assembly_2" />
+    <child link="link_right_roll_to_pitch_assembly" />
+    <origin xyz="0.01905 4.05787e-14 -0.046015" rpy="-1.57079632679 -0 1.57079632679" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.4363323129985797" upper="0.43633231299858505" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_knee_and_ankle_assembly_3">
+    <visual>
+      <origin xyz="0.01606 -0.065 0.1092" rpy="1.57079632679 8.40834555449e-17 -1.02613890118e-15" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/right_cache.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_3_0">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 -0.14365 -0.07215" rpy="1.57079632679 8.40834555449e-17 -1.02613890118e-15" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/leg_spacer.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_3_1">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 -0.14365 -0.07205" rpy="1.57079632679 2.46996564876e-29 -2.46996564876e-29" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_right_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_3_2">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 -0.14365 -0.07205" rpy="1.57079632679 4.6196685933e-25 -4.6196685933e-25" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_left_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_3_3">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_hip_pitch" type="revolute">
+    <parent link="link_right_roll_to_pitch_assembly" />
+    <child link="link_knee_and_ankle_assembly_3" />
+    <origin xyz="-0.07415 2.48437e-15 0.03511" rpy="3.14019861056e-16 1.57079632679 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.5235987755982988" upper="1.2217304763960306" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_knee_and_ankle_assembly_4">
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10925" rpy="-1.57079632679 8.40834555449e-17 1.02613890118e-15" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/leg_spacer.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_4_0">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10915" rpy="-1.57079632679 -3.55253165363e-22 -3.55253165363e-22" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_right_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_4_1">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.14365 0.10915" rpy="-1.57079632679 7.65942071002e-30 7.65942071002e-30" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/left_knee_to_ankle_left_sheet.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_knee_and_ankle_assembly_4_2">
+        <color rgba="0.223529 0.219608 0.219608 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_knee" type="revolute">
+    <parent link="link_knee_and_ankle_assembly_3" />
+    <child link="link_knee_and_ankle_assembly_4" />
+    <origin xyz="1.38778e-16 0.07865 0.037" rpy="3.14159265359 -7.10692e-22 -2.20667999999e-26" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_foot_assembly_2">
+    <visual>
+      <origin xyz="0.01606 0.2223 0.10905" rpy="-1.57079632679 -1.21878866989e-29 -1.21878866989e-29" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_side.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_2_0">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01656 0.2228 0.10955" rpy="-1.57079632679 -1.21878866989e-29 -1.21878866989e-29" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_bottom_tpu.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_2_1">
+        <color rgba="0.305882 0.298039 0.278431 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01656 0.2228 0.10955" rpy="-1.57079632679 -1.21878866989e-29 -1.21878866989e-29" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_bottom_pla.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_2_3">
+        <color rgba="0.305882 0.298039 0.278431 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.01606 0.2223 0.10905" rpy="-1.57079632679 -1.21878866989e-29 -1.21878866989e-29" />
+      <geometry>
+        <mesh filename="package://chibi_sim/mjcf/assets/foot_top.stl" scale="1 1 1" />
+      </geometry>
+      <material name="link_foot_assembly_2_4">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_ankle" type="revolute">
+    <parent link="link_knee_and_ankle_assembly_4" />
+    <child link="link_foot_assembly_2" />
+    <origin xyz="1.32533e-15 -0.07865 0.0001" rpy="7.77156e-16 -6.66134e-16 1.110222e-15" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5707963267948957" upper="1.5707963267948974" effort="3.23" velocity="8.0" />
+  </joint>
+  <ros2_control name="ChibiTopicSystem" type="system">
+    <hardware>
+      <plugin>joint_state_topic_hardware_interface/JointStateTopicSystem</plugin>
+      <param name="joint_commands_topic">/mujoco/joint_commands</param>
+      <param name="joint_states_topic">/mujoco/joint_states</param>
+      <param name="trigger_joint_command_threshold">-1</param>
+    </hardware>
+    <joint name="left_hip_yaw">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_hip_roll">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_hip_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_knee">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_ankle">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="neck_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="head_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="head_yaw">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="head_roll">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="antenna_l">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="antenna_r">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="eye_pan">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="eye_tilt">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="eyelid_close">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="jaw_open">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_hip_yaw">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_hip_roll">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_hip_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_knee">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_ankle">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+  </ros2_control>
+</robot>

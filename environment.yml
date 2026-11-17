@@ -1,0 +1,14 @@
+name: chibi-sim
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy>=1.24,<2
+  - matplotlib>=3.8
+  - pip:
+      - mujoco>=3.2,<4
+      - pyyaml>=6
+      - gymnasium>=0.29,<1
+# ROS 2 Jazzy binaries are not published for this macOS arm64 channel.
+# Run the ROS nodes in a Linux/Ubuntu 24.04 RoboStack or Docker environment.

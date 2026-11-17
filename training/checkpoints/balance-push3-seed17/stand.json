@@ -1,0 +1,30 @@
+{
+  "algorithm": "PPO",
+  "environment_version": 1,
+  "seed": 17,
+  "push_force_n": 3.0,
+  "push_duration_s": 0.12,
+  "push_times_s": [
+    1.0,
+    2.5,
+    4.0
+  ],
+  "completed_steps": 524288,
+  "workers": 2,
+  "device": "cpu",
+  "action_scale_rad": 0.12,
+  "force_cap_ratio": 0.65,
+  "elapsed_seconds": 236.00840345886536,
+  "model_sha256": "4c9e8e2d6b4cfe6555f7b89285ecb68652dbcb3a89e13bc67721201b84161253",
+  "environment_sha256": "53d8cd7ae4f9267f20945c4923acf04fe58c4b78345f2f6eaff4ac2938213fea",
+  "python": "3.12.13",
+  "packages": {
+    "torch": "2.15.0",
+    "mujoco": "4.0.1",
+    "numpy": "2.5.5",
+    "gymnasium": "0.29.1",
+    "stable-baselines3": "2.9.2"
+  },
+  "randomization": "independent body mass/inertia x0.8..1.2, friction .5..1.0, initial tilt +/-2deg, joint q sigma .005rad, qvel sigma .005",
+  "scope": "provisional free-root standing simulation; no walking or hardware validation"
+}

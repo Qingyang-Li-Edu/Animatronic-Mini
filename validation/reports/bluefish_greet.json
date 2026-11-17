@@ -1,0 +1,32 @@
+{
+  "motion": "greet",
+  "results": {
+    "neutral": {
+      "active_joint_rmse_rad": 0.2827918997038045,
+      "all_joint_rmse_rad": 0.15272508156053985,
+      "max_actuator_force_ratio": 0.00036402418600439733,
+      "return": -6997.599279361102,
+      "steps": 300,
+      "finite": true,
+      "scope": "single deterministic nominal rollout; robustness not yet evaluated"
+    },
+    "reference": {
+      "active_joint_rmse_rad": 0.018365506377601138,
+      "all_joint_rmse_rad": 0.009918513642552267,
+      "max_actuator_force_ratio": 0.2163230957269674,
+      "return": -29.66118534137364,
+      "steps": 300,
+      "finite": true,
+      "scope": "single deterministic nominal rollout; robustness not yet evaluated"
+    },
+    "ppo": {
+      "active_joint_rmse_rad": 0.005376990462693005,
+      "all_joint_rmse_rad": 0.0040411933022984,
+      "max_actuator_force_ratio": 0.5833115213533628,
+      "return": -5.899279853587545,
+      "steps": 300,
+      "finite": true,
+      "scope": "single deterministic nominal rollout; robustness not yet evaluated"
+    }
+  }
+}

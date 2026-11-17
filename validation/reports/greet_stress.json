@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "summary": {
+    "repeat_count": 100,
+    "repeat_worst_active_rmse_rad": 0.005567759995521215,
+    "randomized_cases": 10,
+    "randomized_worst_active_rmse_rad": 0.005620319150021297,
+    "max_force_ratio": 0.65
+  },
+  "policy": "training/checkpoints/ppo-safe/greet.zip",
+  "randomization": "independent body mass/inertia x0.8..1.2; initial q sigma .005 rad, qvel sigma .01 rad/s",
+  "scope": "fixed-base tracking robustness only; not a balance or locomotion test"
+}

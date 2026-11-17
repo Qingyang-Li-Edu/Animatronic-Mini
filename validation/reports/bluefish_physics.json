@@ -1,0 +1,300 @@
+{
+  "scope": "provisional simulation model only; no hardware measurements",
+  "status": "passed",
+  "model": "/Users/quinnlee/Desktop/rob/chibi_ws/src/chibi_sim/mjcf/bluefish_physics_free.xml",
+  "cases": {
+    "standing": {
+      "root_xyz_m": [
+        -0.00012562786771470186,
+        -9.648799669876644e-16,
+        0.1568873848485936
+      ],
+      "com_xyz_m": [
+        0.0001401293932630919,
+        -9.800758252269954e-16,
+        0.1888182242416885
+      ],
+      "tilt_degrees": 0.03968949795128117,
+      "support_margin_m": 0.02313908550014058,
+      "mass_kg": 0.8079999999999999,
+      "normal_load_n": 7.926479997562804,
+      "weight_n": 7.92648,
+      "load_error_ratio": 3.074751130939701e-10,
+      "max_penetration_m": 0.0031891784384329245,
+      "max_state_velocity": 0.5101199999999996,
+      "max_energy_j": 1.6005996000000005,
+      "final_speed": 5.264183737398572e-07,
+      "contacts": [
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dt_1ms": {
+      "root_xyz_m": [
+        -0.00012591254395269639,
+        -1.9688606298925656e-17,
+        0.15688738484329848
+      ],
+      "com_xyz_m": [
+        0.00013984442956391493,
+        -1.8248947457676804e-17,
+        0.18881822423830374
+      ],
+      "tilt_degrees": 0.0396899018040498,
+      "support_margin_m": 0.0231390844625953,
+      "mass_kg": 0.8079999999999999,
+      "normal_load_n": 7.926479997326842,
+      "weight_n": 7.92648,
+      "load_error_ratio": 3.3724398411385944e-10,
+      "max_penetration_m": 0.002918100170107603,
+      "max_state_velocity": 0.5003099999999995,
+      "max_energy_j": 1.6005996000000005,
+      "final_speed": 5.781049556147041e-07,
+      "contacts": [
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "root_difference_from_2ms_m": 2.846762380437746e-07
+    },
+    "dt_4ms": {
+      "root_xyz_m": [
+        -0.00012557416117189456,
+        4.108313217461682e-18,
+        0.15688738485966036
+      ],
+      "com_xyz_m": [
+        0.0001401836070804872,
+        5.3673374875520015e-18,
+        0.1888182242494157
+      ],
+      "tilt_degrees": 0.039688792532888,
+      "support_margin_m": 0.02313908728895225,
+      "mass_kg": 0.8079999999999999,
+      "normal_load_n": 7.926479998020688,
+      "weight_n": 7.92648,
+      "load_error_ratio": 2.497088020849945e-10,
+      "max_penetration_m": 0.002876723044248738,
+      "max_state_velocity": 0.5101199999999999,
+      "max_energy_j": 1.6005996000000005,
+      "final_speed": 4.1445837729306605e-07,
+      "contacts": [
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "root_difference_from_2ms_m": 5.37065439475075e-08
+    },
+    "light_low_friction": {
+      "root_xyz_m": [
+        -8.077005181753204e-06,
+        7.250292102234294e-16,
+        0.15696868417894996
+      ],
+      "com_xyz_m": [
+        0.00028282771849738884,
+        7.125140514725282e-16,
+        0.18889931685929942
+      ],
+      "tilt_degrees": 0.004547748888230507,
+      "support_margin_m": 0.023282508838661058,
+      "mass_kg": 0.6464000000000002,
+      "normal_load_n": 6.341184000016988,
+      "weight_n": 6.341184000000002,
+      "load_error_ratio": 2.6787445809433837e-12,
+      "max_penetration_m": 0.0030913460544422684,
+      "max_state_velocity": 0.5101200000000004,
+      "max_energy_j": 1.2804796800000002,
+      "final_speed": 4.807232378801274e-09,
+      "contacts": [
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "heavy_high_friction": {
+      "root_xyz_m": [
+        -0.000311347835281804,
+        8.633530490703919e-19,
+        0.15677234000629256
+      ],
+      "com_xyz_m": [
+        -8.794207908800934e-05,
+        0.0,
+        0.1887034808191343
+      ],
+      "tilt_degrees": 0.11238591095778135,
+      "support_margin_m": 0.022909998152727217,
+      "mass_kg": 0.9695999999999999,
+      "normal_load_n": 9.511776003388468,
+      "weight_n": 9.511776,
+      "load_error_ratio": 3.562392735821234e-10,
+      "max_penetration_m": 0.0033332888422442485,
+      "max_state_velocity": 0.5101200000000004,
+      "max_energy_j": 1.9207195200000005,
+      "final_speed": 7.445402047703717e-06,
+      "contacts": [
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "drop_10cm": {
+      "root_xyz_m": [
+        -0.0001249928732834222,
+        -5.0715891244302306e-17,
+        0.15688738483119688
+      ],
+      "com_xyz_m": [
+        0.00014076339897253943,
+        -5.367337487552001e-17,
+        0.1888182242307615
+      ],
+      "tilt_degrees": 0.039690863498700074,
+      "support_margin_m": 0.02313908205214042,
+      "mass_kg": 0.8079999999999999,
+      "normal_load_n": 7.926479999234198,
+      "weight_n": 7.92648,
+      "load_error_ratio": 9.661307974285726e-11,
+      "max_penetration_m": 0.008812431213740958,
+      "max_state_velocity": 1.4911199999999982,
+      "max_energy_j": 2.3932475999999996,
+      "final_speed": 6.547704552530668e-08,
+      "contacts": [
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "fall_collision": {
+      "root_xyz_m": [
+        0.031039302521754422,
+        1.1332716737314382e-17,
+        0.06606307240640627
+      ],
+      "com_xyz_m": [
+        0.06256587844515625,
+        1.3955077467635202e-17,
+        0.07108616037892937
+      ],
+      "tilt_degrees": 82.14856313673911,
+      "support_margin_m": -0.18218039527463328,
+      "mass_kg": 0.8079999999999999,
+      "normal_load_n": 7.926482037220097,
+      "weight_n": 7.92648,
+      "load_error_ratio": 2.570144752154885e-07,
+      "max_penetration_m": 0.01208881862337148,
+      "max_state_velocity": 8.025938586950593,
+      "max_energy_j": 2.403589243670766,
+      "final_speed": 5.176753644656493e-06,
+      "contacts": [
+        [
+          "floor",
+          "head_contact"
+        ],
+        [
+          "floor",
+          "left_foot_contact"
+        ],
+        [
+          "floor",
+          "right_foot_contact"
+        ]
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

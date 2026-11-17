@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checks": {
+    "fixed": {
+      "physics_parameters_identical": true,
+      "new_model_sha256": "52b78374b28adb419bb1c60548386de6804e95bfbda6ec00a7af6e96fc74b237"
+    },
+    "_free": {
+      "physics_parameters_identical": true,
+      "new_model_sha256": "6b9e61a816e758510884d6d95a864cf668f7900a059fca843faff8ccacf3e86f"
+    }
+  },
+  "previous_seven_scenarios_reproduced": true,
+  "visual_meshes_removed": 35,
+  "appearance": "third_party/bluefatfish/BlueFatFish.vrm"
+}

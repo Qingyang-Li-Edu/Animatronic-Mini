@@ -1,0 +1,3 @@
+# Compatibility entry point for the tested isolated Homebrew Python 3.12 venv.
+# Do not install this into the conda simulator environment.
+-r requirements-macos.lock.txt

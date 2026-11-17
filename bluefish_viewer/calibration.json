@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "model_sha256": "c14879ff5c42501043896aae03ce971b2c11eee2e76106d47ee98741aa842ff5",
+  "coordinate_matrix": [
+    [
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "arm_rest_z_rad": {
+    "left": -1.5707963267948966,
+    "right": 1.5707963267948966
+  },
+  "elbow_axis": "Y",
+  "elbow_sign": {
+    "left": 1,
+    "right": -1
+  },
+  "hip_euler_order": "YZX",
+  "head_euler_order": "XYZ",
+  "avatar_units_per_physics_m": 1.8541597333578848,
+  "physics_reference_root": [
+    -0.00029103529169146637,
+    5.249516130092397e-18,
+    0.15678495306140403
+  ],
+  "physics_reference_feet": {
+    "left": [
+      -4.3497185685898874e-05,
+      0.032999999999999995,
+      0.02378518348582989
+    ],
+    "right": [
+      -4.349718568607973e-05,
+      -0.032999999999999995,
+      0.02378518348582989
+    ]
+  },
+  "avatar_rest_bones": {
+    "head": [
+      -1.284287458267801e-16,
+      0.45197160557890875,
+      -2.0111026989519285e-09
+    ],
+    "hips": [
+      0.0,
+      0.13911470770835876,
+      0.0
+    ],
+    "leftFoot": [
+      0.08601253406965677,
+      0.05586484069788976,
+      -2.807683309147575e-08
+    ],
+    "leftLowerLeg": [
+      0.09005885196779563,
+      0.1102951856570696,
+      0.0028422715217071184
+    ],
+    "leftUpperLeg": [
+      0.09014107805656907,
+      0.189088900596733,
+      0.005684575259351066
+    ],
+    "rightFoot": [
+      -0.08601253699113966,
+      0.05586484054243922,
+      -2.6993574517604457e-08
+    ],
+    "rightLowerLeg": [
+      -0.0900588529477104,
+      0.11029518559282143,
+      0.00284227214544352
+    ],
+    "rightUpperLeg": [
+      -0.09014107789489845,
+      0.18908890059403557,
+      0.00568457528458034
+    ],
+    "spine": [
+      -1.0884553035054982e-16,
+      0.22052069639034624,
+      0.008704504604122714
+    ]
+  },
+  "rotation_test_poses": 40,
+  "max_rotation_matrix_error": 6.661338147750939e-16,
+  "limits": [
+    "length-based shell retargeting; avatar and collision proxies have different proportions",
+    "no foot pinning or hidden base reset to conceal slip",
+    "no claim that the avatar mesh is the measured physical collision surface"
+  ]
+}

@@ -1,0 +1,13 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv*/
+*.egg-info/
+tensorboard/
+.idea/
+.vscode/
+
+# BlueFatFish VRM: author forbids redistribution (see third_party/bluefatfish/.gitignore)
+third_party/bluefatfish/*
+!third_party/bluefatfish/.gitignore
+!third_party/bluefatfish/README.md

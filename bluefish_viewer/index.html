@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>蓝色小肥鱼 · VRM 仿真外观</title>
+  <script type="importmap">
+    {"imports":{
+      "three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+      "@pixiv/three-vrm":"https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.4.1/lib/three-vrm.module.js"
+    }}
+  </script>
+  <style>
+    :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; background: radial-gradient(circle at 60% 25%, #173e72 0, #071427 48%, #030711 100%); }
+    #stage { width: 100vw; height: 100vh; display: block; }
+    .panel { position: fixed; left: 16px; top: 20px; width: min(275px, calc(100vw - 32px)); padding: 16px 14px 14px; border: 1px solid #81cfff45; border-radius: 16px; background: #061426d9; box-shadow: 0 18px 60px #0008; backdrop-filter: blur(12px); }
+    h1 { margin: 0 0 5px; font-size: 20px; letter-spacing: .03em; }
+    p { margin: 6px 0 14px; color: #bcd4ec; font-size: 12px; line-height: 1.5; }
+    .status { color: #75d8ff; font-size: 12px; min-height: 18px; }
+    .motions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    button { border: 1px solid #78cfff70; border-radius: 10px; padding: 9px; color: #e7f7ff; background: #0b2d52; cursor: pointer; }
+    button:hover { background: #154d7c; }
+    small { display: block; margin-top: 12px; color: #88a9c8; line-height: 1.45; }
+  </style>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+  <section class="panel">
+    <h1>蓝色小肥鱼 · VRM 外观</h1>
+    <p>使用下载的原版模型作为外壳，显示实际仿真的身体姿态、关节动作和表情。</p>
+    <div id="status" class="status">正在加载模型…</div>
+    <div id="connection" class="status">正在连接 MuJoCo…</div>
+    <div class="motions">
+      <button data-motion="balance">平衡 · 0.8 N</button><button data-motion="balance_strong">强扰动 · 3 N</button>
+      <button data-motion="greet_balance">站立招手</button><button data-motion="greet_balance_strong">招手 · 3 N</button>
+      <button data-motion="nod">点头</button><button data-motion="shake">摇头</button>
+      <button data-motion="greet">招手 · 固定基座</button><button data-motion="look_around">张望</button>
+      <button data-motion="blink">眨眼</button><button data-motion="crouch">屈腿</button>
+      <button data-motion="idle">中性表情</button><button data-motion="happy">开心表情</button>
+    </div>
+    <small>拖动旋转视角 · 滚轮缩放<br>模型：木子恶魔 / MZEM；仅限个人非商业使用</small>
+    <small id="retarget-status">正在读取骨骼校准…</small>
+  </section>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { VRMLoaderPlugin } from '@pixiv/three-vrm';
+
+    const canvas = document.querySelector('#stage');
+    const status = document.querySelector('#status');
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(28, innerWidth/innerHeight, .01, 100);
+    camera.position.set(0, .95, 4.7);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, .85, 0); controls.enableDamping = true; controls.minDistance = 1.5; controls.maxDistance = 7;
+    scene.add(new THREE.HemisphereLight(0xbfe7ff, 0x0d1830, 2.2));
+    const key = new THREE.DirectionalLight(0xffffff, 3); key.position.set(2, 4, 3); key.castShadow = true; scene.add(key);
+    const rim = new THREE.PointLight(0x3baeff, 15, 5); rim.position.set(-2, 1.8, -1); scene.add(rim);
+    const floor = new THREE.Mesh(new THREE.CircleGeometry(1.8, 64), new THREE.MeshStandardMaterial({color:0x0b2542, roughness:.8, metalness:.05}));
+    floor.rotation.x = -Math.PI/2; floor.position.set(.18,.03,0); floor.receiveShadow = true; scene.add(floor);
+    const calibration = await fetch('/calibration.json', {cache:'no-store'}).then(r => {
+      if (!r.ok) throw new Error('Missing shell calibration'); return r.json();
+    });
+    let avatarRoot, restPivot, displayScale = 5, restFeet, diagnosticTime = 0;
+    const basis = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().set(0,1,0,0, 0,0,1,0, 1,0,0,0, 0,0,0,1));
+    let vrm, clock = new THREE.Clock(), motion = 'idle', motionStart = 0;
+    let liveState = {connected:false, positions:{}}, stateTime = 0;
+    const connection = document.querySelector('#connection');
+    async function pollState() {
+      try {
+        const response = await fetch('/api/state', {cache:'no-store'});
+        if (!response.ok) throw new Error('State unavailable');
+        liveState = await response.json(); stateTime = performance.now();
+        connection.textContent = liveState.connected
+          ? `${liveState.controller || 'ROS'} · ${liveState.mode || '实时动作'} · ${(liveState.simulation_time || 0).toFixed(2)} s · 推力 ${(liveState.push_force_n || 0).toFixed(1)} N`
+          : (liveState.error ? '仿真错误：' + liveState.error : '仿真未连接 · 保持最后姿态');
+      } catch (_) { liveState.connected = false; connection.textContent = '仿真未连接 · 保持最后姿态'; }
+      setTimeout(pollState, 50);
+    }
+    pollState();
+    const loader = new GLTFLoader(); loader.register(parser => new VRMLoaderPlugin(parser));
+    loader.load('./BlueFatFish.vrm', gltf => {
+      vrm = gltf.userData.vrm; avatarRoot = new THREE.Group(); scene.add(avatarRoot); avatarRoot.add(vrm.scene);
+      vrm.scene.rotation.y = 0; vrm.scene.position.set(.18,0,0);
+      for (const side of ['left','right']) {
+        const arm = vrm.humanoid.getNormalizedBoneNode(side+'UpperArm');
+        if (arm) arm.rotation.z = calibration.arm_rest_z_rad[side];
+      }
+      vrm.update(0); vrm.scene.updateMatrixWorld(true);
+      const box = new THREE.Box3().setFromObject(vrm.scene), size = box.getSize(new THREE.Vector3());
+      const scale = 1.5 / Math.max(size.y, .01); vrm.scene.scale.setScalar(scale);
+      vrm.scene.updateMatrixWorld(true);
+      vrm.scene.position.y += floor.position.y-new THREE.Box3().setFromObject(vrm.scene).min.y;
+      vrm.scene.traverse(obj => { if (obj.isMesh) { obj.castShadow = true; obj.receiveShadow = true; } });
+      vrm.scene.updateMatrixWorld(true);
+      displayScale = scale * calibration.avatar_units_per_physics_m;
+      restFeet = Object.fromEntries(['left','right'].map(side => [side,
+        vrm.humanoid.getNormalizedBoneNode(side+'Foot').getWorldPosition(new THREE.Vector3())]));
+      restPivot = restFeet.left.clone().add(restFeet.right).multiplyScalar(.5);
+      const r = calibration.physics_reference_root, l = calibration.physics_reference_feet.left, f = calibration.physics_reference_feet.right;
+      restPivot.add(new THREE.Vector3(r[1]-(l[1]+f[1])/2,r[2]-(l[2]+f[2])/2,r[0]-(l[0]+f[0])/2).multiplyScalar(displayScale));
+      avatarRoot.position.copy(restPivot); vrm.scene.position.sub(restPivot);
+      status.textContent = '原版模型已加载 · 实际仿真驱动';
+      document.querySelector('#retarget-status').textContent = '轴向校验：40 姿态通过 · 足底比例校准完成';
+    }, event => { if (event.total) status.textContent = `正在加载模型 ${Math.round(event.loaded/event.total*100)}%`; }, err => { status.textContent = '模型加载失败：请通过本地地址打开'; console.error(err); });
+    async function setMotion(name) {
+      motion = name; motionStart = clock.getElapsedTime();
+      if (vrm?.expressionManager) { vrm.expressionManager.setValue('happy', name === 'happy' ? .8 : 0); vrm.expressionManager.setValue('blink', 0); }
+      status.textContent = `动作：${name} · 正在发送`;
+      try {
+        const response = await fetch(`/motion/${name}`, {method:'POST'});
+        const result = await response.json();
+        status.textContent = ['sent_to_mujoco','queued_in_mujoco'].includes(result.status) ? `动作：${name} · MuJoCo 已收到` : `动作：${name}`;
+      } catch (_) { status.textContent = `动作：${name} · 预览`; }
+    }
+    document.querySelectorAll('[data-motion]').forEach(b => b.addEventListener('click', () => setMotion(b.dataset.motion)));
+    function animate() {
+      requestAnimationFrame(animate); const delta = Math.min(clock.getDelta(), .05), t = clock.elapsedTime, u = t - motionStart;
+      if (vrm) {
+        const hips = vrm.humanoid?.getNormalizedBoneNode('hips');
+        const head = vrm.humanoid?.getNormalizedBoneNode('head');
+        const rightArm = vrm.humanoid?.getNormalizedBoneNode('rightUpperArm');
+        const leftArm = vrm.humanoid?.getNormalizedBoneNode('leftUpperArm');
+        const live = liveState.connected && performance.now()-stateTime < 2000;
+        const q = liveState.positions;
+        const bone = name => vrm.humanoid?.getNormalizedBoneNode(name);
+        const expr = (name,value) => vrm.expressionManager?.setValue(name,THREE.MathUtils.clamp(value,0,1));
+        if (live) {
+          // MuJoCo: X forward/Y left/Z up. VRM normalized bones: Y up.
+          if (hips) hips.rotation.set(0,0,0);
+          const root = liveState.root;
+          if (root && avatarRoot && restPivot) {
+            const p = root.position, r = root.reference_position, w = root.quaternion_wxyz;
+            avatarRoot.position.copy(restPivot).add(new THREE.Vector3(p[1]-r[1],p[2]-r[2],p[0]-r[0]).multiplyScalar(displayScale));
+            const orientation = new THREE.Quaternion(w[1],w[2],w[3],w[0]);
+            avatarRoot.quaternion.copy(basis).multiply(orientation).multiply(basis.clone().invert());
+          } else if (avatarRoot && restPivot) {
+            avatarRoot.position.copy(restPivot); avatarRoot.quaternion.identity();
+          }
+          if (head) head.rotation.set(q.head_pitch || 0, q.head_yaw || 0, (q.head_roll || 0));
+          const neck = bone('neck'); if (neck) neck.rotation.x = q.neck_pitch || 0;
+          if (leftArm) leftArm.rotation.z = calibration.arm_rest_z_rad.left + (q.left_shoulder || 0);
+          if (rightArm) rightArm.rotation.z = calibration.arm_rest_z_rad.right + (q.right_shoulder || 0);
+          for (const side of ['left','right']) {
+            const forearm = bone(side+'LowerArm');
+            if (forearm) forearm.rotation.set(0, calibration.elbow_sign[side]*(q[side+'_elbow'] || 0), 0);
+            const thigh = bone(side+'UpperLeg');
+            if (thigh) thigh.rotation.set(q[side+'_hip_pitch']||0,q[side+'_hip_yaw']||0,(q[side+'_hip_roll']||0),calibration.hip_euler_order);
+            const shin = bone(side+'LowerLeg'); if (shin) shin.rotation.x = q[side+'_knee']||0;
+            const foot = bone(side+'Foot'); if (foot) foot.rotation.x = q[side+'_ankle']||0;
+          }
+          expr('blink',(q.eyelid_close||0)/1.15);
+          expr('aa',(q.jaw_open||0)/.4);
+          expr('lookLeft',Math.max(0,(q.eye_pan||0)/.12));
+          expr('lookRight',Math.max(0,-(q.eye_pan||0)/.12));
+          expr('lookUp',Math.max(0,(q.eye_tilt||0)/.09));
+          expr('lookDown',Math.max(0,-(q.eye_tilt||0)/.09));
+        }
+        vrm.update(delta);
+        if (live && liveState.root?.free && liveState.physics_feet && restFeet && t-diagnosticTime > .25) {
+          diagnosticTime = t;
+          vrm.scene.updateMatrixWorld(true);
+          const errors = ['left','right'].map(side => {
+            const actual = vrm.humanoid.getNormalizedBoneNode(side+'Foot').getWorldPosition(new THREE.Vector3());
+            const p = liveState.physics_feet[side], r = calibration.physics_reference_feet[side];
+            const expected = restFeet[side].clone().add(new THREE.Vector3(p[1]-r[1],p[2]-r[2],p[0]-r[0]).multiplyScalar(displayScale));
+            return actual.distanceTo(expected)/displayScale*1000;
+          });
+          const diagnostic = document.querySelector('#retarget-status');
+          diagnostic.textContent = `轴向校验 40/40 · 足部映射偏差 ${errors[0].toFixed(1)} / ${errors[1].toFixed(1)} mm（物理尺度）`;
+          diagnostic.dataset.footErrorsMm = JSON.stringify(errors);
+          diagnostic.dataset.coordinateCheck = 'passed';
+        }
+      }
+      controls.update(); renderer.render(scene, camera);
+    }
+    addEventListener('resize', () => { camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+    animate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="bluefish_physics">
+  <link name="base_link" />
+  <link name="link_base" />
+  <joint name="link_base_fixed" type="fixed">
+    <parent link="base_link" />
+    <child link="link_base" />
+    <origin xyz="0 0 0.17" rpy="0 -0 0" />
+  </joint>
+  <link name="link_left_upper_arm" />
+  <joint name="left_shoulder" type="revolute">
+    <parent link="link_base" />
+    <child link="link_left_upper_arm" />
+    <origin xyz="0.002 0.076 0.045" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.1" upper="1.1" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_forearm" />
+  <joint name="left_elbow" type="revolute">
+    <parent link="link_left_upper_arm" />
+    <child link="link_left_forearm" />
+    <origin xyz="0 0.008 -0.065" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.2" upper="0.15" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_hip_yaw_link" />
+  <joint name="left_hip_yaw" type="revolute">
+    <parent link="link_base" />
+    <child link="link_left_hip_yaw_link" />
+    <origin xyz="0 0.033 -0.061" rpy="0 -0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_hip_roll_link" />
+  <joint name="left_hip_roll" type="revolute">
+    <parent link="link_left_hip_yaw_link" />
+    <child link="link_left_hip_roll_link" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_thigh" />
+  <joint name="left_hip_pitch" type="revolute">
+    <parent link="link_left_hip_roll_link" />
+    <child link="link_left_thigh" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_shin" />
+  <joint name="left_knee" type="revolute">
+    <parent link="link_left_thigh" />
+    <child link="link_left_shin" />
+    <origin xyz="0 0 -0.037" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.1" upper="0.9" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_left_foot" />
+  <joint name="left_ankle" type="revolute">
+    <parent link="link_left_shin" />
+    <child link="link_left_foot" />
+    <origin xyz="0 0 -0.035" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_upper_arm" />
+  <joint name="right_shoulder" type="revolute">
+    <parent link="link_base" />
+    <child link="link_right_upper_arm" />
+    <origin xyz="0.002 -0.076 0.045" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.1" upper="1.1" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_forearm" />
+  <joint name="right_elbow" type="revolute">
+    <parent link="link_right_upper_arm" />
+    <child link="link_right_forearm" />
+    <origin xyz="0 -0.008 -0.065" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.2" upper="0.15" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_hip_yaw_link" />
+  <joint name="right_hip_yaw" type="revolute">
+    <parent link="link_base" />
+    <child link="link_right_hip_yaw_link" />
+    <origin xyz="0 -0.033 -0.061" rpy="0 -0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_hip_roll_link" />
+  <joint name="right_hip_roll" type="revolute">
+    <parent link="link_right_hip_yaw_link" />
+    <child link="link_right_hip_roll_link" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_thigh" />
+  <joint name="right_hip_pitch" type="revolute">
+    <parent link="link_right_hip_roll_link" />
+    <child link="link_right_thigh" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_shin" />
+  <joint name="right_knee" type="revolute">
+    <parent link="link_right_thigh" />
+    <child link="link_right_shin" />
+    <origin xyz="0 0 -0.037" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.1" upper="0.9" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_right_foot" />
+  <joint name="right_ankle" type="revolute">
+    <parent link="link_right_shin" />
+    <child link="link_right_foot" />
+    <origin xyz="0 0 -0.035" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_neck_pitch_assembly" />
+  <joint name="neck_pitch" type="revolute">
+    <parent link="link_base" />
+    <child link="link_neck_pitch_assembly" />
+    <origin xyz="0 0 0.085" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_head_pitch_to_yaw" />
+  <joint name="head_pitch" type="revolute">
+    <parent link="link_neck_pitch_assembly" />
+    <child link="link_head_pitch_to_yaw" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.6" upper="0.6" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_neck_yaw_assembly" />
+  <joint name="head_yaw" type="revolute">
+    <parent link="link_head_pitch_to_yaw" />
+    <child link="link_neck_yaw_assembly" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.8" upper="0.8" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_head_assembly" />
+  <joint name="head_roll" type="revolute">
+    <parent link="link_neck_yaw_assembly" />
+    <child link="link_head_assembly" />
+    <origin xyz="0 0 0.075" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.35" upper="0.35" effort="3.23" velocity="8.0" />
+  </joint>
+  <link name="link_hair_bow_l" />
+  <joint name="antenna_l" type="revolute">
+    <parent link="link_head_assembly" />
+    <child link="link_hair_bow_l" />
+    <origin xyz="0.014 0.111 0.025" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.8" upper="0.8" effort="0.3" velocity="8.0" />
+  </joint>
+  <link name="link_hair_bow_r" />
+  <joint name="antenna_r" type="revolute">
+    <parent link="link_head_assembly" />
+    <child link="link_hair_bow_r" />
+    <origin xyz="0.014 -0.111 0.025" rpy="0 -0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.8" upper="0.8" effort="0.3" velocity="8.0" />
+  </joint>
+  <link name="link_face_root" />
+  <joint name="link_face_root_fixed" type="fixed">
+    <parent link="link_head_assembly" />
+    <child link="link_face_root" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+  </joint>
+  <link name="link_face_pan" />
+  <joint name="eye_pan" type="revolute">
+    <parent link="link_face_root" />
+    <child link="link_face_pan" />
+    <origin xyz="-0.12 0 0" rpy="0 -0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.12" upper="0.12" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_face_tilt" />
+  <joint name="eye_tilt" type="revolute">
+    <parent link="link_face_pan" />
+    <child link="link_face_tilt" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.09" upper="0.09" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_face_eyelid" />
+  <joint name="eyelid_close" type="revolute">
+    <parent link="link_face_root" />
+    <child link="link_face_eyelid" />
+    <origin xyz="0.074 0 0.014" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="1.2" effort="0.08" velocity="8.0" />
+  </joint>
+  <link name="link_face_jaw" />
+  <joint name="jaw_open" type="revolute">
+    <parent link="link_face_root" />
+    <child link="link_face_jaw" />
+    <origin xyz="0.085 0 -0.049" rpy="0 -0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="0.4" effort="0.08" velocity="8.0" />
+  </joint>
+  <ros2_control name="ChibiTopicSystem" type="system">
+    <hardware>
+      <plugin>joint_state_topic_hardware_interface/JointStateTopicSystem</plugin>
+      <param name="joint_commands_topic">/mujoco/joint_commands</param>
+      <param name="joint_states_topic">/mujoco/joint_states</param>
+      <param name="trigger_joint_command_threshold">-1</param>
+    </hardware>
+    <joint name="left_shoulder">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_elbow">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_hip_yaw">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_hip_roll">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_hip_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_knee">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_ankle">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_shoulder">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_elbow">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_hip_yaw">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_hip_roll">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_hip_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_knee">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_ankle">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="neck_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="head_pitch">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="head_yaw">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="head_roll">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="antenna_l">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="antenna_r">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="eye_pan">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="eye_tilt">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="eyelid_close">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="jaw_open">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+  </ros2_control>
+</robot>

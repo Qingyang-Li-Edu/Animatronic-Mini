@@ -1,0 +1,94 @@
+{
+  "status": "passed",
+  "policy": "training/checkpoints/greet-balance-seed37/stand_greet.zip",
+  "continuous_seconds": 32.0000000000022,
+  "phases": [
+    [
+      "settle",
+      1.0,
+      true
+    ],
+    [
+      "greet",
+      7.0,
+      true
+    ],
+    [
+      "rest",
+      4.0,
+      false
+    ],
+    [
+      "greet_again",
+      7.0,
+      true
+    ],
+    [
+      "quiet",
+      5.0,
+      false
+    ],
+    [
+      "greet_final",
+      8.0,
+      true
+    ]
+  ],
+  "boundaries": [
+    {
+      "phase": "settle",
+      "time_s": 1.0000000000000007,
+      "tilt_deg": 0.16940766071766564,
+      "base_speed": 0.017859728971702852,
+      "drift_m": 0.002936256982036068,
+      "arm_rmse_rad": 0.005669032521566554
+    },
+    {
+      "phase": "greet",
+      "time_s": 7.999999999999874,
+      "tilt_deg": 0.06973189487453955,
+      "base_speed": 0.005791736602145606,
+      "drift_m": 0.002942213527467257,
+      "arm_rmse_rad": 0.008381448347135072
+    },
+    {
+      "phase": "rest",
+      "time_s": 11.999999999999789,
+      "tilt_deg": 0.09052911617114529,
+      "base_speed": 2.8884065438873446e-08,
+      "drift_m": 0.002689012775541384,
+      "arm_rmse_rad": 9.002578603933655e-05
+    },
+    {
+      "phase": "greet_again",
+      "time_s": 19.00000000000017,
+      "tilt_deg": 0.17705855868775527,
+      "base_speed": 0.024188472816011622,
+      "drift_m": 0.0028210906401255984,
+      "arm_rmse_rad": 0.00584467187484734
+    },
+    {
+      "phase": "quiet",
+      "time_s": 24.000000000000952,
+      "tilt_deg": 0.0905291054862975,
+      "base_speed": 2.4987610824109903e-08,
+      "drift_m": 0.0027245107610343005,
+      "arm_rmse_rad": 9.002578742249292e-05
+    },
+    {
+      "phase": "greet_final",
+      "time_s": 32.0000000000022,
+      "tilt_deg": 0.07342911898530803,
+      "base_speed": 0.012476471335348781,
+      "drift_m": 0.00251881020985333,
+      "arm_rmse_rad": 0.008525249796310752
+    }
+  ],
+  "failures": [],
+  "max_tilt_deg": 0.6423892432955168,
+  "max_force_ratio": 0.65,
+  "max_drift_m": 0.004137909844023887,
+  "max_arm_rmse_rad": 0.5494901623423415,
+  "max_active_arm_rmse_rad": 0.01871241458245001,
+  "scope": "continuous MuJoCo state; upper-body command on/off transitions; no hardware validation"
+}

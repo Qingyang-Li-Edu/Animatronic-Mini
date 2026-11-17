@@ -1,0 +1,16 @@
+{
+  "algorithm": "hierarchical PPO; frozen upper-body pose PPO, fine-tuned leg PPO",
+  "seed": 47,
+  "push_force_n": 3.0,
+  "workers": 2,
+  "device": "cpu",
+  "completed_steps": 262144,
+  "init": "training/checkpoints/greet-balance-seed37/stand_greet.zip",
+  "upper_policy": "/Users/quinnlee/Desktop/rob/chibi_ws/training/checkpoints/ppo-safe/greet.zip",
+  "elapsed_seconds": 105.73524516704492,
+  "model_sha256": "6b9e61a816e758510884d6d95a864cf668f7900a059fca843faff8ccacf3e86f",
+  "upper_policy_sha256": "24d0b7a79788b39b6e97a9d5193a9f4bed5b40574014eed05bdbf15b5609acaa",
+  "environment_sha256": "8087da1a649aae1f748d0447c35f5a318de6996576743f85b890c9e6c9dcb2ce",
+  "episode_seconds": 8.0,
+  "scope": "free-root greeting compensation, no locomotion/hardware calibration"
+}
